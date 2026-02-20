@@ -70,7 +70,7 @@ Olympus is a powerful, easy-to-use Discord bot designed to enhance your server e
 
 1. First, clone the repository:  
    ```bash
-   git clone https://github.com/sonujana26/olympus-bot
+   git clone https://github.com/oneandonlyhasan7-design/Skilest-bot
    ```
 2. After cloning, run the bot:
    ```bash
