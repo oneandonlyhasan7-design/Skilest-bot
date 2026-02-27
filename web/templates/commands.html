@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Commands</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Bot Commands</h1>
+        <div class="command-list">
+            <h2>Available Commands:</h2>
+            <ul>
+                {% for command in bot.commands %}
+                    <li>{{ command.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="command-form">
+            <h2>Execute Command:</h2>
+            <form id="command-form">
+                <label for="guild">Select Guild:</label>
+                <select id="guild" name="guild">
+                    {% for guild in bot.guilds %}
+                        <option value="{{ guild.id }}">{{ guild.name }}</option>
+                    {% endfor %}
+                </select>
+                <label for="command">Command:</label>
+                <input type="text" id="command" name="command" placeholder="Enter command">
+                <label for="args">Arguments:</label>
+                <input type="text" id="args" name="args" placeholder="Enter arguments">
+                <button type="submit">Execute</button>
+            </form>
+            <div id="response"></div>
+        </div>
+        <a href="/" class="back-btn">Back to Dashboard</a>
+    </div>
+    <script>
+        document.getElementById("command-form").addEventListener("submit", (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = {
+                guild_id: formData.get("guild"),
+                command: formData.get("command"),
+                args: formData.get("args")
+            };
+
+            fetch("/execute_command", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const responseDiv = document.getElementById("response");
+                if (data.status === "success") {
+                    responseDiv.innerHTML = `<p style="color: #43b581;">${data.message}</p>`;
+                } else {
+                    responseDiv.innerHTML = `<p style="color: #f04747;">${data.message}</p>`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

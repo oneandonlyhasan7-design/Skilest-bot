@@ -1,0 +1,34 @@
+ú<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Bot Dashboard</h1>
+        <div class="status-container">
+            <h2>Status: <span id="status">Online</span></h2>
+            <h2>Ping: <span id="ping">N/A</span></h2>
+        </div>
+        <div class="button-container">
+            <button id="ping-btn">Ping</button>
+            <a href="/invite" class="invite-btn">Invite Bot</a>
+        </div>
+        <div class="command-container">
+            <a href="/commands" class="command-btn">Execute Commands</a>
+        </div>
+    </div>
+    <script>
+        document.getElementById("ping-btn").addEventListener("click", () => {
+            fetch("/ping")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("ping").innerText = data.ping + "ms";
+                });
+        });
+    </script>
+</body>
+</html>

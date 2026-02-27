@@ -3,7 +3,6 @@ import os
 # os.system("pip install -r requirements.txt")
 import asyncio
 import traceback
-from threading import Thread
 from datetime import datetime
 
 import aiohttp
@@ -20,6 +19,7 @@ from utils.config import *
 import jishaku
 import cogs 
 
+from web.app import init_app
 
 
 #Configuring Jishaku behavior
@@ -134,30 +134,6 @@ async def on_command_completion(context: commands.Context) -> None:
                 print(f'Command failed: {e}')
                 traceback.print_exc()
 
-
-from flask import Flask
-from threading import Thread
-
-app = Flask(__name__)
-
-
-@app.route('/')
-def home():
-    return f"© skilest devolopement™ 2024"
-
-
-def run():
-    app.run(host='0.0.0.0', port=8080)
-
-
-def keep_alive():
-    server = Thread(target=run)
-    server.start()
-
-
-keep_alive()
-
-
 async def main():
     async with client:
         if isinstance(client.owner_ids, list):
@@ -167,6 +143,7 @@ async def main():
         os.system("clear")
         #await client.load_extension("cogs")
         await client.load_extension("jishaku")
+        init_app(client)
         await client.start(TOKEN)
 
 
