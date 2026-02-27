@@ -7,7 +7,7 @@ import pytz
 
 app = Quart(__name__)
 
-BOT_TOKEN = "YOUR-BOT-TOKEN"
+BOT_TOKEN = "FILL_IN_YOUR_BOT_TOKEN"
 
 @app.before_serving
 async def setup_database():
@@ -46,9 +46,9 @@ async def get_user_avatar(user_id):
 @app.route('/topgg/', methods=['POST'])
 async def topgg():
     authorization = request.headers.get('Authorization')
-    webhook = 'YOUR-VOTE-POSTER-CHANNEL-WEBHOOK'
+    webhook = 'FILL_IN_YOUR_VOTE_POSTER_CHANNEL_WEBHOOK'
 
-    if authorization != 'YOUR-TOPGG-AUTHORIZATION':
+    if authorization != 'FILL_IN_YOUR_TOPGG_AUTHORIZATION':
         return {'error': '401 Unauthorized'}, 401
 
     data = json.loads(await request.data)
@@ -115,7 +115,7 @@ async def topgg():
                     {"name": "🏆 Current Streak:", "value": f"{streak}", "inline": True},
                 ],
                 "footer": {
-                    "text": f"Voter ID: {user_id} | skilest devolopement™ | {footer_time}",
+                    "text": f"Voter ID: {user_id} | skilest development™ | {footer_time}",
                     "icon_url": "https://cdn.discordapp.com/icons/699587669059174461/f689b4366447d5a23eda8d0ec749c1ba.png?size=1024"
                 },
                 "thumbnail": {
