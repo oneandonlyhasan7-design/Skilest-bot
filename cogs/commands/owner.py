@@ -181,7 +181,7 @@ class Owner(commands.Cog):
                 self.staff = {row[0] for row in await cursor.fetchall()}
 
     @commands.command(name="staff_add", aliases=["staffadd", "addstaff"], help="Adds a user to the staff list.")
-    @commands.is_owner()
+    @is_owner()
     async def staff_add(self, ctx, user: discord.User):
         if user.id in self.staff:
             sonu = discord.Embed(title="<:olympus_notify:1227866804630720565> Access Denied", description=f"{user} is already in the staff list.", color=0x000000)
@@ -195,7 +195,7 @@ class Owner(commands.Cog):
             await ctx.reply(embed=sonu2, mention_author=False)
 
     @commands.command(name="staff_remove", aliases=["staffremove", "removestaff"], help="Removes a user from the staff list.")
-    @commands.is_owner()
+    @is_owner()
     async def staff_remove(self, ctx, user: discord.User):
         if user.id not in self.staff:
             sonu = discord.Embed(title="<:olympus_notify:1227866804630720565> Access Denied", description=f"{user} is not in the staff list.", color=0x000000)
@@ -209,7 +209,7 @@ class Owner(commands.Cog):
             await ctx.reply(embed=sonu2, mention_author=False)
 
     @commands.command(name="staff_list", aliases=["stafflist", "liststaff", "staffs"], help="Lists all staff members.")
-    @commands.is_owner()
+    @is_owner()
     async def staff_list(self, ctx):
         if not self.staff:
             await ctx.send("The staff list is currently empty.")
@@ -240,7 +240,7 @@ class Owner(commands.Cog):
         await paginator.paginate()
 
     @commands.command(name="mutual", aliases=["mutuals"])
-    @commands.is_owner()
+    @is_owner()
     async def mutual_servers(self, ctx: Context, user: discord.User):
         
         if not user:
@@ -266,7 +266,7 @@ class Owner(commands.Cog):
             await ctx.send("No mutual guilds found.")
 
     @commands.command(name="getinvite", aliases=["gi", "getinvites"], help="Get invites for a guild or channel.")
-    @commands.is_owner()
+    @is_owner()
     async def getinvite(self, ctx, guild_id: int = None, channel_id: int = None):
         guild = None
         channel = None
@@ -333,7 +333,7 @@ class Owner(commands.Cog):
             await ctx.send("Bot lacks permission to access or create invites.")
 
     @commands.command(name="getguild")
-    @commands.is_owner()
+    @is_owner()
     async def get_guild(self, ctx, channel_id: int):
         channel = self.client.get_channel(channel_id)
 
@@ -354,13 +354,13 @@ class Owner(commands.Cog):
             await ctx.send("Invalid channel ID or bot has no access to the channel.")
             
     @commands.command(name="olympus.restart", help="Restarts the client.")
-    @commands.is_owner()
+    @is_owner()
     async def _restart(self, ctx: Context):
         await ctx.reply("Restarting Olympus...")
         restart_program()
 
     @commands.command(name="sync", help="Syncs all database.")
-    @commands.is_owner()
+    @is_owner()
     async def _sync(self, ctx):
         await ctx.reply("Syncing...", mention_author=False)
         with open('events.json', 'r') as f:
@@ -383,7 +383,7 @@ class Owner(commands.Cog):
 
 
     @commands.command(name="owners")
-    @commands.is_owner()
+    @is_owner()
     async def own_list(self, ctx):
         nplist = OWNER_IDS
         npl = ([await self.client.fetch_user(nplu) for nplu in nplist])
@@ -406,7 +406,7 @@ class Owner(commands.Cog):
 
 
     @commands.command()
-    @commands.is_owner()
+    @is_owner()
     async def dm(self, ctx, user: discord.User, *, message: str):
         """ DM the user of your choice """
         try:
@@ -418,14 +418,14 @@ class Owner(commands.Cog):
 
 
     @commands.group()
-    @commands.is_owner()
+    @is_owner()
     async def change(self, ctx):
         if ctx.invoked_subcommand is None:
             await ctx.send_help(str(ctx.command))
 
 
     @change.command(name="nickname")
-    @commands.is_owner()
+    @is_owner()
     async def change_nickname(self, ctx, *, name: str = None):
         """ Change nickname. """
         try:
@@ -439,7 +439,7 @@ class Owner(commands.Cog):
 
 
     @commands.command(name="ownerban", aliases=["forceban", "dna"])
-    @commands.is_owner()
+    @is_owner()
     async def _ownerban(self, ctx: Context, user_id: int, *, reason: str = "No reason provided"):
         
         member = ctx.guild.get_member(user_id)
@@ -473,7 +473,7 @@ class Owner(commands.Cog):
             await ctx.message.delete()
 
     @commands.command(name="ownerunban", aliases=["forceunban"])
-    @commands.is_owner()
+    @is_owner()
     async def _ownerunban(self, ctx: Context, user_id: int, *, reason: str = "No reason provided"):
         user = self.client.get_user(user_id)
         if user:
@@ -505,7 +505,7 @@ class Owner(commands.Cog):
 
 
     @commands.command(name="globalunban")
-    @commands.is_owner()
+    @is_owner()
     async def globalunban(self, ctx: Context, user: discord.User):
         success_guilds = []
         error_guilds = []
@@ -529,7 +529,7 @@ class Owner(commands.Cog):
         await ctx.reply(f"{success_message}\n{error_message}", mention_author=False)
 
     @commands.command(name="guildban")
-    @commands.is_owner()
+    @is_owner()
     async def guildban(self, ctx: Context, guild_id: int, user_id: int, *, reason: str = "No reason provided"):
         guild = self.client.get_guild(guild_id)
         if not guild:
@@ -549,7 +549,7 @@ class Owner(commands.Cog):
             await ctx.reply(f"User not found in the specified guild {guild.name}.", mention_author=False)
 
     @commands.command(name="guildunban")
-    @commands.is_owner()
+    @is_owner()
     async def guildunban(self, ctx: Context, guild_id: int, user_id: int, *, reason: str = "No reason provided"):
         guild = self.client.get_guild(guild_id)
         if not guild:
@@ -574,7 +574,7 @@ class Owner(commands.Cog):
 
 
     @commands.command(name="leaveguild")
-    @commands.is_owner()
+    @is_owner()
     async def leave_guild(self, ctx, guild_id: int):
         guild = self.client.get_guild(guild_id)
         if guild is None:
@@ -609,7 +609,7 @@ class Owner(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
-    @commands.is_owner()
+    @is_owner()
     async def servertour(self, ctx, time_in_seconds: int, member: discord.Member):
         guild = ctx.guild
 
@@ -742,7 +742,7 @@ class Owner(commands.Cog):
         aliases=["fpb"],
         help="Clear recently bot messages in channel (Bot owner only)")
     @commands.cooldown(1, 3, commands.BucketType.user)
-    @commands.is_owner()
+    @is_owner()
     @commands.bot_has_permissions(manage_messages=True)
     async def _purgebot(self, ctx, prefix=None, search=100):
         
@@ -758,7 +758,7 @@ class Owner(commands.Cog):
         aliases=["fpu"],
         help="Clear recent messages of a user in channel (Bot owner only)")
     @commands.cooldown(1, 3, commands.BucketType.user)
-    @commands.is_owner()
+    @is_owner()
     @commands.bot_has_permissions(manage_messages=True)
     async def purguser(self, ctx, member: discord.Member, search=100):
         
@@ -768,7 +768,7 @@ class Owner(commands.Cog):
 
 
     @commands.command(name="owner.help", aliases=['ownerhelp', 'owner-help'], hidden=True)
-    @commands.is_owner()
+    @is_owner()
     async def _owner_help(self, ctx):
         
         embed = Embed(title="Owner Commands",

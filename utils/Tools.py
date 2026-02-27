@@ -4,6 +4,7 @@ from discord.ext import commands
 from core import Context
 import aiosqlite
 import asyncio
+from utils.config import OWNER_IDS
 
 async def setup_db():
   async with aiosqlite.connect('db/prefix.db') as db:
@@ -97,17 +98,9 @@ def restart_program():
   python = sys.executable
   os.execl(python, python, *sys.argv)
 
-
 def is_owner():
     async def predicate(ctx):
-        if ctx.author.id == 1359085571250589839:
-            return True
-        if ctx.author.id == ctx.guild.owner_id:
-            return True
-        async with aiosqlite.connect("db/anti.db") as db:
-            async with db.execute("SELECT owner_id FROM extraowners WHERE guild_id = ? AND owner_id = ?", (ctx.guild.id, ctx.author.id)) as cursor:
-                check = await cursor.fetchone()
-                return check is not None
+        return ctx.author.id in OWNER_IDS
     return commands.check(predicate)
 
 def blacklist_check():

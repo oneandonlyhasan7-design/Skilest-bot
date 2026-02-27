@@ -5,6 +5,7 @@ from discord import Member
 from utils import Paginator, DescriptionEmbedPaginator
 from datetime import timedelta
 import asyncio
+from utils.Tools import is_owner
 
 class Global(commands.Cog):
     def __init__(self, client):
@@ -13,14 +14,14 @@ class Global(commands.Cog):
         self.client.frozen_nicknames = {}
 
     @commands.group(name="global", invoke_without_command=True)
-    @commands.is_owner()
+    @is_owner()
     async def global_command(self, ctx: commands.Context):
         if ctx.subcommand_passed is None:
             await ctx.send_help(ctx.command)
             ctx.command.reset_cooldown(ctx)
 
     @commands.command(name="globalban",help="Bans the user from all mutual guilds.")
-    @commands.is_owner()
+    @is_owner()
     async def global_ban(self, ctx: commands.Context, user: discord.User, reason: str = "Severe violations of Discord's terms of service."):
         mutual_guilds = [guild for guild in self.client.guilds if guild.get_member(user.id)]
         mutual_count = len(mutual_guilds)
@@ -92,7 +93,7 @@ class Global(commands.Cog):
         await ctx.send(embed=confirm_embed, view=view)
 
     @global_command.command(name="kick", help="Kicks the user from all mutual guilds.")
-    @commands.is_owner()
+    @is_owner()
     async def global_kick(self, ctx: commands.Context, user: discord.User, reason: str = "Severe violations of Discord's terms of service."):
         mutual_guilds = [guild for guild in self.client.guilds if guild.get_member(user.id)]
         mutual_count = len(mutual_guilds)
@@ -164,7 +165,7 @@ class Global(commands.Cog):
         await ctx.send(embed=confirm_embed, view=view)
 
     @global_command.command(name="timeout", help="Timeouts the user for 28 days in all mutual guilds.")
-    @commands.is_owner()
+    @is_owner()
     async def global_timeout(self, ctx: commands.Context, user: discord.User, reason: str = "Severe violations of Discord's terms of service."):
         mutual_guilds = [guild for guild in self.client.guilds if guild.get_member(user.id)]
         mutual_count = len(mutual_guilds)
@@ -241,7 +242,7 @@ class Global(commands.Cog):
 
 
     @global_command.command(name="nick", help="Changes the nickname of a user in all mutual guilds.")
-    @commands.is_owner()
+    @is_owner()
     async def global_nick(self, ctx: commands.Context, user: discord.User, *, name: str):
         if len(name) > 32:
             return await ctx.send("Nickname cannot exceed 32 characters. Please provide a shorter nickname.")
@@ -319,7 +320,7 @@ class Global(commands.Cog):
 
 
     @global_command.command(name="clearnick", help="Clears the nickname of a user in all mutual guilds.")
-    @commands.is_owner()
+    @is_owner()
     async def global_clearnick(self, ctx: commands.Context, user: discord.User):
         mutual_guilds = [guild for guild in self.client.guilds if guild.get_member(user.id)]
         mutual_count = len(mutual_guilds)
@@ -394,7 +395,7 @@ class Global(commands.Cog):
 
 
     @global_command.command(name="freezenick", help="Freezes a user's nickname in all mutual guilds.")
-    @commands.is_owner()
+    @is_owner()
     async def global_freezenick(self, ctx: commands.Context, user: discord.User, *, name: str):
         if len(name) > 32:
             return await ctx.send("Nickname cannot exceed 32 characters. Please provide a shorter nickname.")
@@ -514,7 +515,7 @@ class Global(commands.Cog):
  
 
     @global_command.command(name="unfreezenick", help="Unfreezes a user's nickname in all mutual guilds.")
-    @commands.is_owner()
+    @is_owner()
     async def global_unfreezenick(self, ctx: commands.Context, user: discord.User):
         if not hasattr(self.client, "frozen_nicknames"):
             self.client.frozen_nicknames = {}
