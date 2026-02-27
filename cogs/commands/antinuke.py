@@ -163,7 +163,7 @@ class Antinuke(commands.Cog):
 
         embed.set_author(name="Olympus Antinuke", icon_url=self.bot.user.avatar.url)
 
-        embed.set_footer(text="Successfully Enabled Antinuke for this server | Powered by skilest devolopement™", icon_url=self.bot.user.avatar.url)
+        embed.set_footer(text="Successfully Enabled Antinuke for this server | Powered by skilest development™", icon_url=self.bot.user.avatar.url)
         embed.set_thumbnail(url=self.bot.user.avatar.url)
 
         view = discord.ui.View()
@@ -189,8 +189,7 @@ class Antinuke(commands.Cog):
       await ctx.send(embed=embed)
     else:
       embed = discord.Embed(
-        description='Invalid option. Please use `enable` or `disable`.',
-        color=0x000000
+        description='Invalid option. Please use `enable` or `disable`.'
       )
       await ctx.send(embed=embed)
 
@@ -224,6 +223,6 @@ class Antinuke(commands.Cog):
 """
 @Author: Sonu Jana
     + Discord: me.sonu
-    + Community: https://discord.gg/odx (skilest devolopement™)
+    + Community: https://discord.gg/odx (skilest development™)
     + for any queries reach out Community or DM me.
 """
