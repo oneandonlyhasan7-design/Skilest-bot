@@ -1,0 +1,135 @@
+### Fun
+- `$achievement <text>` - Generates a Minecraft achievement.
+- `$alert <text>` - Creates a fake alert.
+- `$blur <member>` - Blurs a user's avatar.
+- `$bright <member>` - Brightens a user's avatar.
+- `$burn <member>` - Burns a user's avatar.
+- `$captcha <member>` - Generates a captcha of a user's avatar.
+- `$clown <member>`- Adds a clown nose to a user's avatar.
+- `$clyde <text>` - Makes Clyde say something.
+- `$dark <member>` - Darkens a user's avatar.
+- `$dexter <text>` - Generates a Dexter meme.
+- `$drip <member>` - Adds "drip" to a user's avatar.
+- `$floor <text>` - Generates a "floor" meme.
+- `$gay <member>` - Puts a gay pride overlay on a user's avatar.
+- `$hack <member>` - Hacks a user's account (for fun).
+- `$hash [algorithm] <message>` - Hashes a message.
+- `$hitler <member>` - Makes a user look like Hitler.
+- `$horny <member>` - Generates a "horny" license.
+- `$invert <member>` - Inverts the colors of a user's avatar.
+- `$jail <member>` - Puts a user in jail.
+- `$joke` - Tells a random joke.
+- `$lisapresentation <text>` - Generates a Lisa Simpson presentation meme.
+- `$meme` - Fetches a random meme.
+- `$pixelate <member>` - Pixelates a user's avatar.
+- `$rickroll <url>` - Detects if a URL is a rickroll.
+- `$rip <member>` - Generates a "rest in peace" image for a user.
+- `$sepia <member>` - Applies a sepia filter to a user's avatar.
+- `$sharpen <member>` - Sharpens a user's avatar.
+- `$shit <member>` - Makes a user step in "shit".
+- `$spank <user1> <user2>` - Generates a "spank" meme.
+- `$token [user]` - Generates a fake user token.
+- `$urban <phrase>` - Searches for a phrase on Urban Dictionary.
+- `$wanted <member>` - Creates a "wanted" poster for a user.
+- `$wasted <member>` - Generates a "wasted" screen from GTA.
+- `$wizz` - A fake "wizz" command.
+
+### Games
+- `$2048` - Play the 2048 game.
+- `$battleship <user>` - Play Battleship with another user.
+- `$chess <user>` - Play chess with another user.
+- `$connectfour <user>` - Play Connect Four with another user.
+- `$country-guesser start` - Start a game of guessing countries from their flags.
+- `$lights-out` - Play the Lights Out puzzle game.
+- `$memory-game` - Test your memory with a card matching game.
+- `$number-slider` - Play a number sliding puzzle game.
+- `$rps [user]` - Play Rock, Paper, Scissors with the bot or another user.
+- `$tic-tac-toe <member>` - Play Tic-Tac-Toe with another user.
+- `$wordle` - Play a game of Wordle.
+
+### Utility
+- `$afk [reason]` - Sets your status to AFK.
+- `$avatar [user]` - Shows a user's avatar.
+- `$ban <user> [reason]` - Bans a user from the server.
+- `$botinfo` - Shows information about the bot.
+- `$clear <amount>` - Deletes a specified number of messages.
+- `$embed` - Creates an interactive embed message.
+- `$firstmsg` - Jumps to the first message in a channel.
+- `$giveaway <channel> <duration> <winners> <prize>` - Starts a giveaway.
+- `$help` - Shows the help message.
+- `$hide` - Hides a channel.
+- `$invite` - Get the bot's invite link.
+- `$kick <user> [reason]` - Kicks a user from the server.
+- `$lock` - Locks a channel.
+- `$lockall` - Locks all channels in the server.
+- `$membercount` - Shows the server's member count.
+- `$mute <user> <duration> [reason]`- Mutes a user for a specified duration.
+- `$ping` - Shows the bot's latency.
+- `$poll <message>`- Creates a poll.
+- `$purge <amount>` - Deletes a specified number of messages.
+- `$role all <role>` - Gives a role to all members in the server.
+- `$role bots <role>` - Gives a role to all bots in the server.
+- `$role humans <role>` - Gives a role to all humans in the server.
+- `$role remove <member> <role>` - Removes a role from a member.
+- `$role removeall <role>` - Removes a role from all members in the server.
+- `$servericon` - Shows the server's icon.
+- `$serverinfo` - Shows information about the server.
+- `$slowmode <seconds>` - Sets the slowmode for a channel.
+- `$unban <user>` - Unbans a user from the server.
+- `$unhide` - Unhides a channel.
+- `$unlock` - Unlocks a channel.
+- `$unlockall` - Unlocks all channels in the server.
+- `$unmute <user>` - Unmutes a user.
+- `$userinfo [user]` - Shows information about a user.
+- `$users` - Shows the bot's total user count across all servers.
+- `$voice deafen <user>` - Deafens a user in a voice channel.
+- `$voice disconnect <user>` - Disconnects a user from a voice channel.
+- `$voice kick <user>` - Kicks a user from a voice channel.
+- `$voice mute <user>` - Mutes a user in a voice channel.
+- `$voice undeafen <user>` - Undeafens a user in a voice channel.
+- `$voice unmute <user>` - Unmutes a user in a voice channel.
+- `$warn <user> [reason]` - Warns a user.
+- `$warnings <user>` - Shows the warnings a user has received.
+- `$warnings clear <user>` - Clears a user's warnings.
+
+### Moderation
+- `$antinuke [enable|disable]` - Enables or disables the anti-nuke module.
+- `$automod enable` - Enables the automod system.
+- `$automod disable` - Disables the automod system.
+- `$automod punishment` - Sets the punishment for automod infractions.
+- `$automod ignore channel <channel>` - Excludes a channel from automod.
+- `$automod ignore role <role>` - Excludes a role from automod.
+- `$automod ignore show` - Displays the channels and roles excluded from automod.
+- `$automod ignore reset` - Clears the list of excluded channels and roles.
+- `$automod unignore channel <channel>` - Re-includes a channel in automod.
+- `$automod unignore role <role>` - Re-includes a role in automod.
+- `$automod config` - Shows the current automod configuration.
+- `$automod logging <channel>` - Sets the channel for automod logs.
+- `$blacklist add <user>` - Blacklists a user from using the bot.
+- `$blacklist remove <user>` - Removes a user from the blacklist.
+- `$blacklist show` - Shows the blacklisted users.
+- `$media setup <channel>` - Configures a channel to allow only media files.
+- `$media remove` - Disables the media-only channel configuration.
+- `$media config` - Displays the current media-only channel.
+- `$media bypass add <user>` - Allows a user to send messages in a media-only channel.
+- `$media bypass remove <user>` - Revokes a user's ability to send messages in a media-only channel.
+- `$media bypass show` - Lists all users who can bypass the media-only channel restriction.
+- `$vcrole add <role>` - Assigns a role to users when they join a voice channel.
+- `$vcrole remove <role>` - Removes the role assigned to users in a voice channel.
+- `$vcrole config` - Shows the currently configured voice channel role.
+- `$whitelist <user>` - Whitelists a user, exempting them from anti-nuke measures.
+- `$unwhitelist <user>` - Removes a user from the whitelist, re-enabling anti-nuke measures for them.
+
+### Automation
+- `$ar add <trigger> <response>` - Adds an auto-response.
+- `$ar remove <trigger>` - Removes an auto-response.
+- `$ar list` - Lists all auto-responses.
+- `$ar reset` - Resets all auto-responses.
+- `$autoreact add <trigger> <emojis>` - Adds an auto-reaction.
+- `$autoreact remove <trigger>` - Removes an auto-reaction.
+- `$autoreact list` - Lists all auto-reactions.
+- `$autoreact reset` - Resets all auto-reactions.
+- `$autorole add <role>` - Adds a role to be given to new members.
+- `$autorole remove <role>` - Removes a role from the autorole list.
+- `$autorole list` - Lists all autoroles.
+- `$autorole reset` - Resets the autorole configuration.

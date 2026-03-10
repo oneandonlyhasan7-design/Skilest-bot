@@ -33,7 +33,6 @@ from .commands.autorole import AutoRole
 from .commands.antinuke import Antinuke
 from .commands.extraown import Extraowner
 from .commands.anti_wl import Whitelist
-from .commands.anti_unwl import Unwhitelist
 from .commands.slots import Slots
 from .commands.blackjack import Blackjack
 from .commands.autoreact import AutoReaction
@@ -124,7 +123,7 @@ async def setup(bot: Olympus):
         Voice, afk, Ignore, Media, Invcrole, Giveaway, Embed, Steal, Ship,
         Timer, Blacklist, Block, Nightmode, AiStuffCog, Badges, Map,
         AutoResponder, Customrole, AutoRole, Antinuke, Extraowner, Whitelist,
-        Unwhitelist, Slots, Blackjack, AutoReaction, Stats, Emergency,
+        Slots, Blackjack, AutoReaction, Stats, Emergency,
         NotifCommands, Status, NoPrefix, FilterCog, Global,
 
         # Events
