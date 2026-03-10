@@ -1,31 +1,31 @@
 ### Fun
 - `$achievement <text>` - Generates a Minecraft achievement.
 - `$alert <text>` - Creates a fake alert.
-- `$blur <member>` - Blurs a user's avatar.
-- `$bright <member>` - Brightens a user's avatar.
-- `$burn <member>` - Burns a user's avatar.
-- `$captcha <member>` - Generates a captcha of a user's avatar.
-- `$clown <member>`- Adds a clown nose to a user's avatar.
+- `$blur <member>` - Blurs a user\'s avatar.
+- `$bright <member>` - Brightens a user\'s avatar.
+- `$burn <member>` - Burns a user\'s avatar.
+- `$captcha <member>` - Generates a captcha of a user\'s avatar.
+- `$clown <member>`- Adds a clown nose to a user\'s avatar.
 - `$clyde <text>` - Makes Clyde say something.
-- `$dark <member>` - Darkens a user's avatar.
+- `$dark <member>` - Darkens a user\'s avatar.
 - `$dexter <text>` - Generates a Dexter meme.
-- `$drip <member>` - Adds "drip" to a user's avatar.
+- `$drip <member>` - Adds "drip" to a user\'s avatar.
 - `$floor <text>` - Generates a "floor" meme.
-- `$gay <member>` - Puts a gay pride overlay on a user's avatar.
-- `$hack <member>` - Hacks a user's account (for fun).
+- `$gay <member>` - Puts a gay pride overlay on a user\'s avatar.
+- `$hack <member>` - Hacks a user\'s account (for fun).
 - `$hash [algorithm] <message>` - Hashes a message.
 - `$hitler <member>` - Makes a user look like Hitler.
 - `$horny <member>` - Generates a "horny" license.
-- `$invert <member>` - Inverts the colors of a user's avatar.
+- `$invert <member>` - Inverts the colors of a user\'s avatar.
 - `$jail <member>` - Puts a user in jail.
 - `$joke` - Tells a random joke.
 - `$lisapresentation <text>` - Generates a Lisa Simpson presentation meme.
 - `$meme` - Fetches a random meme.
-- `$pixelate <member>` - Pixelates a user's avatar.
+- `$pixelate <member>` - Pixelates a user\'s avatar.
 - `$rickroll <url>` - Detects if a URL is a rickroll.
 - `$rip <member>` - Generates a "rest in peace" image for a user.
-- `$sepia <member>` - Applies a sepia filter to a user's avatar.
-- `$sharpen <member>` - Sharpens a user's avatar.
+- `$sepia <member>` - Applies a sepia filter to a user\'s avatar.
+- `$sharpen <member>` - Sharpens a user\'s avatar.
 - `$shit <member>` - Makes a user step in "shit".
 - `$spank <user1> <user2>` - Generates a "spank" meme.
 - `$token [user]` - Generates a fake user token.
@@ -49,7 +49,7 @@
 
 ### Utility
 - `$afk [reason]` - Sets your status to AFK.
-- `$avatar [user]` - Shows a user's avatar.
+- `$avatar [user]` - Shows a user\'s avatar.
 - `$ban <user> [reason]` - Bans a user from the server.
 - `$botinfo` - Shows information about the bot.
 - `$clear <amount>` - Deletes a specified number of messages.
@@ -58,13 +58,13 @@
 - `$giveaway <channel> <duration> <winners> <prize>` - Starts a giveaway.
 - `$help` - Shows the help message.
 - `$hide` - Hides a channel.
-- `$invite` - Get the bot's invite link.
+- `$invite` - Get the bot\'s invite link.
 - `$kick <user> [reason]` - Kicks a user from the server.
 - `$lock` - Locks a channel.
 - `$lockall` - Locks all channels in the server.
-- `$membercount` - Shows the server's member count.
+- `$membercount` - Shows the server\'s member count.
 - `$mute <user> <duration> [reason]`- Mutes a user for a specified duration.
-- `$ping` - Shows the bot's latency.
+- `$ping` - Shows the bot\'s latency.
 - `$poll <message>`- Creates a poll.
 - `$purge <amount>` - Deletes a specified number of messages.
 - `$role all <role>` - Gives a role to all members in the server.
@@ -72,7 +72,7 @@
 - `$role humans <role>` - Gives a role to all humans in the server.
 - `$role remove <member> <role>` - Removes a role from a member.
 - `$role removeall <role>` - Removes a role from all members in the server.
-- `$servericon` - Shows the server's icon.
+- `$servericon` - Shows the server\'s icon.
 - `$serverinfo` - Shows information about the server.
 - `$slowmode <seconds>` - Sets the slowmode for a channel.
 - `$unban <user>` - Unbans a user from the server.
@@ -81,7 +81,7 @@
 - `$unlockall` - Unlocks all channels in the server.
 - `$unmute <user>` - Unmutes a user.
 - `$userinfo [user]` - Shows information about a user.
-- `$users` - Shows the bot's total user count across all servers.
+- `$users` - Shows the bot\'s total user count across all servers.
 - `$voice deafen <user>` - Deafens a user in a voice channel.
 - `$voice disconnect <user>` - Disconnects a user from a voice channel.
 - `$voice kick <user>` - Kicks a user from a voice channel.
@@ -90,7 +90,7 @@
 - `$voice unmute <user>` - Unmutes a user in a voice channel.
 - `$warn <user> [reason]` - Warns a user.
 - `$warnings <user>` - Shows the warnings a user has received.
-- `$warnings clear <user>` - Clears a user's warnings.
+- `$warnings clear <user>` - Clears a user\'s warnings.
 
 ### Moderation
 - `$antinuke [enable|disable]` - Enables or disables the anti-nuke module.
@@ -112,7 +112,7 @@
 - `$media remove` - Disables the media-only channel configuration.
 - `$media config` - Displays the current media-only channel.
 - `$media bypass add <user>` - Allows a user to send messages in a media-only channel.
-- `$media bypass remove <user>` - Revokes a user's ability to send messages in a media-only channel.
+- `$media bypass remove <user>` - Revokes a user\'s ability to send messages in a media-only channel.
 - `$media bypass show` - Lists all users who can bypass the media-only channel restriction.
 - `$vcrole add <role>` - Assigns a role to users when they join a voice channel.
 - `$vcrole remove <role>` - Removes the role assigned to users in a voice channel.

@@ -4,7 +4,18 @@ from discord.ext import commands
 from core import Context
 import aiosqlite
 import asyncio
-from utils.config import OWNER_IDS
+from dotenv import load_dotenv
+
+load_dotenv()
+
+def get_bot_owners():
+    owners_str = os.getenv("BOT_OWNERS")
+    if owners_str:
+        return [int(owner_id) for owner_id in owners_str.split(',')]
+    return []
+
+async def is_bot_owner(user_id: int) -> bool:
+    return user_id in get_bot_owners()
 
 async def setup_db():
   async with aiosqlite.connect('db/prefix.db') as db:
@@ -100,7 +111,7 @@ def restart_program():
 
 def is_owner():
     async def predicate(ctx):
-        return ctx.author.id in OWNER_IDS
+        return await is_bot_owner(ctx.author.id)
     return commands.check(predicate)
 
 def blacklist_check():

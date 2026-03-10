@@ -63,13 +63,9 @@ class AntiChannelUpdate(commands.Cog):
             if executor.id in {guild.owner_id, self.bot.user.id}:
                 return
 
-            async with db.execute("SELECT owner_id FROM extraowners WHERE guild_id = ? AND owner_id = ?", (guild.id, executor.id)) as cursor:
-                if await cursor.fetchone():
-                    return
-
-            async with db.execute("SELECT chup FROM whitelisted_users WHERE guild_id = ? AND user_id = ?", (guild.id, executor.id)) as cursor:
-                whitelist_status = await cursor.fetchone()
-            if whitelist_status and whitelist_status[0]:
+            async with db.execute("SELECT 1 FROM whitelisted_permissions WHERE guild_id = ? AND user_id = ? AND permission = 'bypass_channel'", (guild.id, executor.id)) as cursor:
+                is_whitelisted = await cursor.fetchone()
+            if is_whitelisted:
                 return
 
             await self.revert_channel_update_and_ban(before, after, executor)

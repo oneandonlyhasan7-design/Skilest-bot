@@ -76,16 +76,9 @@ class AntiRoleUpdate(commands.Cog):
             return
 
         async with aiosqlite.connect('db/anti.db') as db:
-            async with db.execute("SELECT rlup FROM whitelisted_users WHERE guild_id = ? AND user_id = ?", 
-                                  (guild.id, executor.id)) as cursor:
-                whitelist_status = await cursor.fetchone()
-            if whitelist_status and whitelist_status[0]:
-                return
-
-            async with db.execute("SELECT owner_id FROM extraowners WHERE guild_id = ? AND owner_id = ?", 
-                                  (guild.id, executor.id)) as cursor:
-                extra_owner_status = await cursor.fetchone()
-            if extra_owner_status:
+            async with db.execute("SELECT 1 FROM whitelisted_permissions WHERE guild_id = ? AND user_id = ? AND permission = 'bypass_role'", (guild.id, executor.id)) as cursor:
+                is_whitelisted = await cursor.fetchone()
+            if is_whitelisted:
                 return
 
         await self.ban_executor_and_revert_role_update(guild, executor, before, after)

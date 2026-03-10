@@ -1,9 +1,10 @@
 import discord
 import aiosqlite
 from discord.ext import commands
-from utils.Tools import blacklist_check, ignore_check
+from utils.Tools import blacklist_check, ignore_check, is_bot_owner
 from collections import defaultdict
 import time
+import re
 
 class Media(commands.Cog):
     def __init__(self, client):
@@ -26,6 +27,13 @@ class Media(commands.Cog):
                     PRIMARY KEY (guild_id, user_id)
                 )
             ''')
+            await db.execute('''
+                CREATE TABLE IF NOT EXISTS media_lock (
+                    guild_id INTEGER,
+                    channel_id INTEGER,
+                    PRIMARY KEY (guild_id, channel_id)
+                )
+            ''')
             await db.commit()
 
     @commands.Cog.listener()
@@ -40,6 +48,38 @@ class Media(commands.Cog):
         if ctx.subcommand_passed is None:
             await ctx.send_help(ctx.command)
             ctx.command.reset_cooldown(ctx)
+
+    @media.command(name="lock", help="Locks the channel to prevent users from sending links or images.")
+    @blacklist_check()
+    @ignore_check()
+    @commands.cooldown(1, 3, commands.BucketType.user)
+    async def lock(self, ctx, channel: discord.TextChannel = None):
+        if not (ctx.author.id == ctx.guild.owner_id or await is_bot_owner(ctx.author.id)):
+            return await ctx.reply("This command can only be used by the guild owner or a bot owner.")
+        
+        channel = channel or ctx.channel
+
+        async with aiosqlite.connect('db/media.db') as db:
+            await db.execute('INSERT OR IGNORE INTO media_lock (guild_id, channel_id) VALUES (?, ?)', (ctx.guild.id, channel.id))
+            await db.commit()
+        
+        await ctx.reply(f"The channel {channel.mention} has been locked. Only administrators can send links or images.")
+
+    @media.command(name="unlock", help="Unlocks the channel to allow users to send links or images.")
+    @blacklist_check()
+    @ignore_check()
+    @commands.cooldown(1, 3, commands.BucketType.user)
+    async def unlock(self, ctx, channel: discord.TextChannel = None):
+        if not (ctx.author.id == ctx.guild.owner_id or await is_bot_owner(ctx.author.id)):
+            return await ctx.reply("This command can only be used by the guild owner or a bot owner.")
+        
+        channel = channel or ctx.channel
+
+        async with aiosqlite.connect('db/media.db') as db:
+            await db.execute('DELETE FROM media_lock WHERE guild_id = ? AND channel_id = ?', (ctx.guild.id, channel.id))
+            await db.commit()
+        
+        await ctx.reply(f"The channel {channel.mention} has been unlocked.")
 
     @media.command(name="setup", aliases=["set", "add"], help="Sets up a media-only channel for the server")
     @blacklist_check()
@@ -233,8 +273,23 @@ class Media(commands.Cog):
     async def on_message(self, message):
         if message.author.bot:
             return
+        if not message.guild:
+            return
 
         async with aiosqlite.connect('db/media.db') as db:
+            async with db.execute('SELECT channel_id FROM media_lock WHERE guild_id = ? AND channel_id = ?', (message.guild.id, message.channel.id)) as cursor:
+                locked_channel = await cursor.fetchone()
+
+            if locked_channel:
+                if not (message.author.guild_permissions.administrator or await is_bot_owner(message.author.id)):
+                    if message.attachments or re.search(r"http[s]?://", message.content):
+                        try:
+                            await message.delete()
+                            await message.channel.send(f"{message.author.mention} This channel is locked. You cannot send links or images here.", delete_after=5)
+                        except (discord.Forbidden, discord.HTTPException):
+                            pass
+                        return
+
             async with db.execute('SELECT channel_id FROM media_channels WHERE guild_id = ?', (message.guild.id,)) as cursor:
                 media_channel = await cursor.fetchone()
 
@@ -247,7 +302,7 @@ class Media(commands.Cog):
                 async with db.execute('SELECT 1 FROM media_bypass WHERE guild_id = ? AND user_id = ?', (message.guild.id, message.author.id)) as cursor:
                     bypassed = await cursor.fetchone()
 
-            if blacklisted or bypassed:
+            if blacklisted or bypassed or message.author.guild_permissions.administrator:
                 return
 
             if not message.attachments:

@@ -45,16 +45,10 @@ class AntiPrune(commands.Cog):
             if executor.id in {guild.owner_id, self.bot.user.id}:
                 return
 
-            async with db.execute("SELECT prune FROM whitelisted_users WHERE guild_id = ? AND user_id = ?", (guild.id, executor.id)) as cursor:
-                whitelist_status = await cursor.fetchone()
+            async with db.execute("SELECT 1 FROM whitelisted_permissions WHERE guild_id = ? AND user_id = ? AND permission = 'bypass_prune'", (guild.id, executor.id)) as cursor:
+                is_whitelisted = await cursor.fetchone()
 
-            if whitelist_status and whitelist_status[0]:
-                return
-
-            async with db.execute("SELECT owner_id FROM extraowners WHERE guild_id = ? AND owner_id = ?", (guild.id, executor.id)) as cursor:
-                extra_owner_status = await cursor.fetchone()
-
-            if extra_owner_status:
+            if is_whitelisted:
                 return
 
             await self.ban_executor(guild, executor)

@@ -62,9 +62,9 @@ class AntiBan(commands.Cog):
             if executor.id in {guild.owner_id, self.bot.user.id}:
                 return
 
-            async with db.execute("SELECT ban FROM whitelisted_users WHERE guild_id = ? AND user_id = ?", (guild.id, executor.id)) as cursor:
-                whitelist_status = await cursor.fetchone()
-            if whitelist_status and whitelist_status[0]:
+            async with db.execute("SELECT 1 FROM whitelisted_permissions WHERE guild_id = ? AND user_id = ? AND permission = 'bypass_ban'", (guild.id, executor.id)) as cursor:
+                is_whitelisted = await cursor.fetchone()
+            if is_whitelisted:
                 return
 
             await self.ban_executor(guild, executor, user)
@@ -105,4 +105,3 @@ class AntiBan(commands.Cog):
                         break
             except Exception:
                 return
-
